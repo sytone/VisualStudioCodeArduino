@@ -2,6 +2,7 @@
 //
 // Author: Fabien Royer
 // Copyright (c) 2015 Fabien Royer
+// Modified 2016 Russell Dunn
 // License: LGPL v3
 //
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
@@ -26,12 +27,13 @@
 	"command": "arduino",
 	"isShellCommand": true,
 	"showOutput": "always",
+    	"suppressTaskName": true, // Not suppressing TaskName was causing issues
 	"tasks": [
 		{
-			"taskName": "--verify",
-			"args": ["-v", "${file}"],
+			"taskName": "Verify (Build) Sketch",
+			"args": ["--verify", "${file}"],
 			"isBuildCommand": true,
-			"showOutput": "silent",
+			"showOutput": "always",
 			"problemMatcher": {
 				"owner": "external",
 				"fileLocation": ["relative", "${fileDirname}"],
@@ -46,8 +48,8 @@
 			}
 		},
 		{
-			"taskName": "--upload",
-			"args": ["-v", "${file}"],
+			"taskName": "Upload (Test) Sketch",
+			"args": ["--upload", "${file}"],
 			"isTestCommand": true,
 			"showOutput": "always"
 		}	
