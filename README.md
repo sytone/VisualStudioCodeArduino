@@ -1,3 +1,13 @@
+# Forked by *russdunn* for the following
+- [ ] Issue with port permissions (Ubuntu 16.04.1 x64)  
+- Workaround to be noted in the guide.
+- [x] Incorrect command arguments / switches
+
+https://github.com/arduino/Arduino/blob/master/build/shared/manpage.adoc  
+http://arduino-er.blogspot.com.au/2014/08/arduino-ide-error-avrdude-seropen-cant.html
+
+---
+
 ![arduino upload](/pics/uploadx600.png)
 
 # Using Visual Studio Code as an Arduino IDE
