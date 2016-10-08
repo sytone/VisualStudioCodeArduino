@@ -1,3 +1,9 @@
+# Forked by *sytone* for the following
+- [x] Added serial console in powershell as a task. 
+- [x] Added verbose logging to the output. 
+
+---
+
 # Forked by *russdunn* for the following
 - [ ] Issue with port permissions (Ubuntu 16.04.1 x64)  
 - Workaround to be noted in the guide.
