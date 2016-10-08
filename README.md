@@ -2,6 +2,16 @@
 - [x] Added serial console in powershell as a task. 
 - [x] Added verbose logging to the output. 
 
+
+Update the key bindings so you go to the task list to select what you wany, handy but not needed. 
+```
+
+[
+    { "key": "ctrl+shift+b",          "command": "workbench.action.tasks.runTask" } 
+]
+
+```
+
 ---
 
 # Forked by *russdunn* for the following
