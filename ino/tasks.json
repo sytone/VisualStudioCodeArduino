@@ -2,6 +2,7 @@
 //
 // Author: Fabien Royer
 // Copyright (c) 2015 Fabien Royer
+// Modified 2016 Russell Dunn
 // License: LGPL v3
 //
 // THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
@@ -23,18 +24,31 @@
 //
 {
 	"version": "0.1.0",
-	"command": "arduino",
+	"command": "cmd",
+	"args": [
+		"/C"
+	],
+	//"command": "arduino",
 	"isShellCommand": true,
 	"showOutput": "always",
+	"suppressTaskName": true, // Not suppressing TaskName was causing issues
 	"tasks": [
 		{
-			"taskName": "--verify",
-			"args": ["-v", "${file}"],
+			"taskName": "Verify (Build) Sketch",
+			"args": [
+				"arduino",
+				"--verify",
+				"${file}",
+				"--verbose"
+			],
 			"isBuildCommand": true,
-			"showOutput": "silent",
+			"showOutput": "always",
 			"problemMatcher": {
 				"owner": "external",
-				"fileLocation": ["relative", "${fileDirname}"],
+				"fileLocation": [
+					"relative",
+					"${fileDirname}"
+				],
 				"pattern": {
 					"regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
 					"file": 1,
@@ -46,10 +60,30 @@
 			}
 		},
 		{
-			"taskName": "--upload",
-			"args": ["-v", "${file}"],
+			"taskName": "Upload (Test) Sketch",
+			"args": [
+				"arduino",
+				"--upload",
+				"${file}",
+				"--verbose"
+			],
 			"isTestCommand": true,
 			"showOutput": "always"
-		}	
+		},
+		{
+			"taskName": "Start Serial Monitor (Powershell)",
+			"args": [
+				"start",
+				"/wait",
+				"powershell",
+				"-ExecutionPolicy",
+				"Unrestricted",
+				"-NoProfile",
+				"-NoExit",
+				"-Command",
+				"\"& {[console]::TreatControlCAsInput = $true; $port= new-Object System.IO.Ports.SerialPort COM3,115200,None,8,one; $port.open(); while ($port.IsOpen) { $port.ReadLine(); if ($Host.UI.RawUI.KeyAvailable -and (3 -eq [int]$Host.UI.RawUI.ReadKey('AllowCtrlC,IncludeKeyUp,NoEcho').Character)) { $port.close(); break; }  } $port.close(); }\""
+			],
+			"showOutput": "always"
+		}
 	]
 }
